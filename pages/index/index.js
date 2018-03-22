@@ -3,36 +3,73 @@
 const app = getApp()
 
 Page({
-  data: {
-    motto: 'Hello World',
-    IP: '18.220.245.253:8080',
-    searchText: "MU",
-    companies: []
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  searchTextInput: function(e) {
-    this.setData({
-      searchText: e.detail.value
-    })
 
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    symbolUrl : "/pages/symbol/symbol"
   },
-  searchSymbol: function() {
-    var that = this;
-    var searchText = this.data.searchText;
-    var url = "http://" + this.data.IP + "/searchSymbol?symbol=" + searchText;
-    wx.request({
-      url: url,
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          companies : res.data.companies
-        })
-      }
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    
+  },
+
+  navigateToSearchSymbol: function (event) {
+    wx.navigateTo({
+      url: this.data.symbolUrl
     })
   }
 })

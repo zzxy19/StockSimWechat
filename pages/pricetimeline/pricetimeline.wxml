@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="container">
+    <view class="table">
+        <view class="tr">
+          <view class="th">Symbol</view>
+        </view>
+        <view class="tr">
+          <view class="td">{{timeSeries.symbol}}</view>
+        </view>
+    </view>
+  </view>
+</view>

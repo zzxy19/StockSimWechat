@@ -1,6 +1,7 @@
+var backend = require('../../utils/backend.js')
+
 Page({
   data: {
-    motto: 'Hello World',
     IP: '18.220.245.253:8080',
     searchText: "MU",
     companies: []
@@ -20,7 +21,7 @@ Page({
   searchSymbol: function () {
     var that = this;
     var searchText = this.data.searchText;
-    var url = "http://" + this.data.IP + "/searchSymbol?symbol=" + searchText;
+    var url = backend.buildSearchSymbolRequestUrl(searchText);
     wx.request({
       url: url,
       method: "GET",

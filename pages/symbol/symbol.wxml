@@ -7,13 +7,13 @@
   <view class="container">
     <view class="table">
         <view class="tr">
-          <view class="th">symbol</view>
-          <view class="th">name</view>
+          <view class="th">Symbol</view>
+          <view class="th">Name</view>
         </view>
         <view class="tr" wx:for="{{companies}}">
           <view class="td">{{item.symbol}}</view>
           <view class="td">{{item.name}}</view>
         </view>
     </view>
-</view>
+  </view>
 </view>

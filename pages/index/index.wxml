@@ -1,5 +1,6 @@
 <!--index.wxml-->
 
 <view>
-  <button class="searchSymbol" bindtap="navigateToSearchSymbol">searchSymbol</button>
+  <button class="searchSymbol" bindtap="navigateToSearchSymbol">Search Symbol</button>
+  <button class="showPriceTimeline" bindtap="navigateToShowPriceTimeline">Price</button>
 </view>

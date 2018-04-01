@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    symbol: null,
     timeSeries: null
   },
 
@@ -14,8 +15,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      symbol: options.symbol,
+    })
     var that = this;
-    var url = backend.buildShowPriceTimelineRequestUrl("MU");
+    var url = backend.buildShowPriceTimelineRequestUrl(this.data.symbol);
     wx.request({
       url: url,
       method: "GET",

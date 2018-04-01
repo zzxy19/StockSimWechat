@@ -31,5 +31,11 @@ Page({
         })
       }
     })
+  },
+  showPriceTimeline: function(event) {
+    var symbolToShow = event.currentTarget.dataset.symbol;
+    wx.navigateTo({
+      url: '../pricetimeline/pricetimeline?symbol=' + symbolToShow,
+    })
   }
 })

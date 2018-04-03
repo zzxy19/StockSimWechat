@@ -3,10 +3,15 @@
     <view class="table">
         <view class="tr">
           <view class="th">Symbol</view>
+          <view class="th">Last Refreshed</view>
         </view>
         <view class="tr">
-          <view class="td">{{timeSeries.symbol}}</view>
+          <view class="td">{{symbol}}</view>
+          <view class="td">{{lastRefreshed}}</view>
         </view>
     </view>
+  </view>
+  <view class="container">
+    <canvas canvas-id="priceTimelineCanvas" disable-scroll="true" class="canvas"></canvas>
   </view>
 </view>

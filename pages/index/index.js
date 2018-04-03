@@ -72,11 +72,5 @@ Page({
     wx.navigateTo({
       url: this.data.symbolUrl
     })
-  },
-
-  navigateToShowPriceTimeline: function (event) {
-    wx.navigateTo({
-      url: this.data.priceTimelineUrl
-    })
   }
 })

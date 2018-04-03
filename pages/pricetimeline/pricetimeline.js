@@ -1,5 +1,7 @@
 // pages/pricetimeline/pricetimeline.js
-var backend = require('../../utils/backend.js')
+var backend = require('../../utils/backend.js');
+var wxCharts = require('../../utils/wxcharts/wxcharts-min.js');
+var priceTimelineCanvas = null;
 
 Page({
 
@@ -8,7 +10,57 @@ Page({
    */
   data: {
     symbol: null,
-    timeSeries: null
+    lastRefreshed: null,
+  },
+
+  loadPriceTimelineData: function () {
+    var url = backend.buildShowPriceTimelineRequestUrl(this.data.symbol, 1);
+    var that = this;
+    wx.request({
+      url: url,
+      method: "GET",
+      success: function (res) {
+        that.setData({
+          lastRefreshed: res.data.timeSeries.lastRefreshed,
+          
+        });
+        var timeSeriesData = res.data.timeSeries.values;
+        var timeValues = timeSeriesData.map(d => d.time);
+        var priceValues = timeSeriesData.map(d => d.close);
+        that.fillInPriceTimelineChart(timeValues, priceValues);
+      }
+    })
+  },
+
+  fillInPriceTimelineChart: function(timeValues, priceValues) {
+    priceTimelineCanvas = new wxCharts({
+      canvasId: 'priceTimelineCanvas',
+      type: 'line',
+      categories: timeValues,
+      animation: true,
+      // background: '#f5f5f5',
+      series: [{
+        name: 'Price',
+        data: priceValues,
+        format: function (val, name) {
+          return '$' + val.toFixed(2);
+        }
+      }],
+      xAxis: {
+        disableGrid: true
+      },
+      yAxis: {
+        title: 'Price',
+        min: 0
+      },
+      width: 320,
+      height: 200,
+      dataLabel: false,
+      dataPointShape: true,
+      extra: {
+        lineStyle: 'curve'
+      }
+    });
   },
 
   /**
@@ -18,17 +70,7 @@ Page({
     this.setData({
       symbol: options.symbol,
     })
-    var that = this;
-    var url = backend.buildShowPriceTimelineRequestUrl(this.data.symbol);
-    wx.request({
-      url: url,
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          timeSeries: res.data.timeSeries
-        })
-      }
-    })
+    this.loadPriceTimelineData();
   },
 
   /**

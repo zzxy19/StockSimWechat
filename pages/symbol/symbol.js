@@ -16,9 +16,9 @@ Page({
     this.setData({
       searchText: e.detail.value
     })
-
   },
-  searchSymbol: function () {
+  searchSymbol: function (e) {
+    console.log(this.data.text);
     var that = this;
     var searchText = this.data.searchText;
     var url = backend.buildSearchSymbolRequestUrl(searchText);

@@ -1,8 +1,9 @@
 <view class="container">
   <view class="itemView">
-    <input class="input" name="searchText" placeholder="MU" 
-    bindinput="searchTextInput"></input>
-    <button bindtap="searchSymbol"> search </button> 
+    <input class="input" name="searchText" placeholder="MU" id="searchBox" 
+    bindinput="searchTextInput" bindblur="searchTextInput"></input>
+    <view>{{searchText}}</view>
+    <button bindtap="searchSymbol">Search</button> 
   </view>
   <view class="container">
     <view class="table">

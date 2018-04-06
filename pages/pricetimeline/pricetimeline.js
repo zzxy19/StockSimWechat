@@ -11,10 +11,19 @@ Page({
   data: {
     symbol: null,
     lastRefreshed: null,
+    dateRangeOption: [
+      { displayName: "Day", dateRange: "DAY" },
+      { displayName: "Week", dateRange: "WEEK" },
+      { displayName: "Month", dateRange: "MONTH", selected: true },
+      { displayName: "Year", dateRange: "YEAR" }
+    ],
+    pageLoading: true,
+    currentDateRange: "MONTH",
   },
 
   loadPriceTimelineData: function () {
-    var url = backend.buildShowPriceTimelineRequestUrl(this.data.symbol, 1);
+    var url = backend.buildShowPriceTimelineRequestUrl(
+      this.data.symbol, this.data.currentDateRange);
     var that = this;
     wx.request({
       url: url,
@@ -22,7 +31,7 @@ Page({
       success: function (res) {
         that.setData({
           lastRefreshed: res.data.timeSeries.lastRefreshed,
-          
+          pageLoading: false
         });
         var timeSeriesData = res.data.timeSeries.values;
         var timeValues = timeSeriesData.map(d => d.time);
@@ -53,7 +62,7 @@ Page({
         title: 'Price',
         min: 0
       },
-      width: 320,
+      width: 400,
       height: 200,
       dataLabel: false,
       dataPointShape: true,
@@ -61,6 +70,14 @@ Page({
         lineStyle: 'curve'
       }
     });
+  },
+
+  onDateRangeChanged: function(e) {
+    this.setData({
+      currentDateRange: e.detail.value,
+      pageLoading: true
+    });
+    this.loadPriceTimelineData();
   },
 
   /**

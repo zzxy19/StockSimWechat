@@ -12,6 +12,16 @@
     </view>
   </view>
   <view class="container">
-    <canvas canvas-id="priceTimelineCanvas" disable-scroll="true" class="canvas"></canvas>
+    <radio-group class="radio-group" bindchange="onDateRangeChanged" data-daterange="{{dateRangeOption}}">
+      <label class="radio" wx:for="{{dateRangeOption}}">
+        <radio value="{{item.dateRange}}" checked="{{item.selected}}"/>{{item.displayName}}
+      </label>
+    </radio-group>
+  </view>
+  <view class="container">
+    <block wx:if="{{pageLoading}}">
+      <icon type="waiting" size="30"></icon>
+    </block>
+    <canvas wx:else canvas-id="priceTimelineCanvas" disable-scroll="true" class="canvas"></canvas>
   </view>
 </view>

@@ -10,19 +10,12 @@ function buildSearchSymbolRequestUrl(symbol, maxResult) {
   return outputUrl;
 }
 
-function buildShowPriceTimelineRequestUrl(symbol, type, startDate, dateRange) {
+function buildShowPriceTimelineRequestUrl(symbol, dateRange) {
   var outputUrl = httpMethod + ip + "/showPriceTimeline" +
       "?symbol=" + symbol;
-  if (type) {
-    outputUrl += "&type=" + type;
-  }
-  if (startDate) {
-    outputUrl += "&start_date=" + startDate;
-  }
   if (dateRange) {
     outputUrl += "&date_range=" + dateRange;
   }
-  
   return outputUrl;
 }
 
